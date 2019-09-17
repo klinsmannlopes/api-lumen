@@ -15,12 +15,14 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/clientes', 'APIController@ListaUsuario');
+//login
 
+$router->post('auth/login', 'AuthController@autenticate');
+
+
+//Clientes
 $router->get('/clientes', 'APIController@ListaClientes');
 $router->get('/clientes/{id}', 'APIController@ListaCliente');
-
 $router->post('/clientes', 'APIController@CadastarCliente');
-
 $router->delete('/clientes/{id}', 'APIController@DeleteCliente');
 $router->put('/clientes', 'APIController@AlteraCliente');
