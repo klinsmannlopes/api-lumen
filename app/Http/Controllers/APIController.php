@@ -33,4 +33,47 @@ class APIController extends Controller
         ->header('Content-Type', 'application/json');
     }
 
+    public function ListaCliente($id) {
+        $clientes = Clientes::find($id);
+
+        return response($clientes, 201)
+        ->header('Content-Type', 'application/json');
+    }
+
+    public function CadastarCliente(Request $data) {
+
+        $clientes = Clientes::create([
+            'nome' => $data->nome,
+            'cnpj'=> $data->cnpj
+        ]);
+
+        return response($clientes, 201)
+        ->header('Content-Type', 'application/json');
+
+    }
+
+    public function DeleteCliente($id) {
+
+        $cliente = Clientes::find($id);
+
+        $cliente->delete();
+
+        return response($cliente, 201)
+        ->header('Content-Type', 'application/json');
+
+    }
+
+    public function AlteraCliente(Request $data) {
+
+        $cliente = Clientes::find($data->id);
+
+        $cliente->nome = $data->nome;
+        $cliente->cnpj = $data->cnpj;
+        $cliente->save();
+
+        return response($cliente, 201)
+        ->header('Content-Type', 'application/json');
+
+    }
+
 }

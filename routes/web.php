@@ -15,8 +15,12 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/teste', 'ExampleController@teste');
+$router->get('/clientes', 'APIController@ListaUsuario');
 
-$router->get('/lista-usuarios', 'APIController@ListaUsuario');
+$router->get('/clientes', 'APIController@ListaClientes');
+$router->get('/clientes/{id}', 'APIController@ListaCliente');
 
-$router->get('/lista-clientes', 'APIController@ListaClientes');
+$router->post('/clientes', 'APIController@CadastarCliente');
+
+$router->delete('/clientes/{id}', 'APIController@DeleteCliente');
+$router->put('/clientes', 'APIController@AlteraCliente');
