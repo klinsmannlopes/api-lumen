@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Clientes;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,7 @@ class APIController extends Controller
     }
 
     public function ListaCliente($id) {
+
         $clientes = Clientes::find($id);
 
         return response($clientes, 201)
@@ -27,9 +29,14 @@ class APIController extends Controller
 
     public function CadastarCliente(Request $data) {
 
+        $this->validate($data, [
+            'email' => 'required|email',
+            'cnpj' => 'required'
+        ]);
+
         $clientes = Clientes::create([
-            'nome' => $data->nome,
-            'cnpj'=> $data->cnpj
+            'nome' => $data->input('email'),
+            'cnpj'=> $data->input('cnpj')
         ]);
 
         return response($clientes, 201)
