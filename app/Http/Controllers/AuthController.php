@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Validator;
 use App\User;
+use App\Jornalista;
 use Firebase\JWT\JWT;
 use Firebase\JWT\ExpireException;
 use Illuminate\Support\Facades\Hash;
@@ -16,12 +17,13 @@ class AuthController extends Controller
 
     public function __construct(Request $request) {
         $this->request = $request;
+        
     }
 
-    protected function jwt(User $user) {
+    protected function jwt(Jornalista $jornalista) {
         $payload = [
             'iss' => 'lumen-jwt',
-            'sub' =>  $user->id,
+            'sub' =>  $jornalista->id,
             'iat' =>  time(),
             'exp' =>  time() + 60*60
         ];
@@ -29,13 +31,14 @@ class AuthController extends Controller
         return JWT::encode($payload, env('JWt_SECRET'));
     }
 
-    public function autenticate(User $user) {
+    public function autenticate(Jornalista $jornalista) {
         $this->validate($this->request, [
             'email' => 'required|email',
             'password' => 'required'
         ]);
 
-        $user = User::where('email', $this->request->input('email'))->first();
+        
+        $user = Jornalista::where('email', $this->request->input('email'))->first();
 
         if(!$user) {
             return response()->json([
@@ -52,5 +55,30 @@ class AuthController extends Controller
         return response()->json([
             'erro' => 'email ou senha invalidos'
         ], 400);
+    }
+
+    public function create(Request $data) {
+
+        $this->validate($data, [
+            'email' => 'required|email',
+            'nome' => 'required',
+            'sobrenome' => 'required',
+            'password' => 'required',
+        ]);
+
+        
+
+        $jornalista = Jornalista::create([
+            'email' => $data->input('email'),
+            'nome'=> $data->input('nome'),
+            'sobrenome'=> $data->input('sobrenome'),
+            'password'=> app('hash')->make($data->input('password'))
+        ]);
+
+        dd($jornalista);
+
+        return response($jornalista, 201)
+        ->header('Content-Type', 'application/json');
+
     }
 }

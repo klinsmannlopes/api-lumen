@@ -7,20 +7,15 @@ use App\Clientes;
 use App\Jornalista;
 use App\Noticia;
 use App\TipoNoticia;
+
 use Illuminate\Http\Request;
 
-class APIController extends Controller
+class NoticiaController extends Controller
 {
-    
-    public function __construct() {
-        $this->middleware('jwt.auth');
-    }
-    
-
     public function ListaNoticias() {
         $noticias = Noticia::all();
 
-        return response($clientes, 201)
+        return response($noticias, 201)
         ->header('Content-Type', 'application/json');
     }
 
@@ -32,19 +27,28 @@ class APIController extends Controller
         ->header('Content-Type', 'application/json');
     }
 
-    public function CadastarCliente(Request $data) {
+    public function createNoticia(Request $data) {
 
         $this->validate($data, [
-            'email' => 'required|email',
-            'cnpj' => 'required'
+            'jornalista_id' => 'required',
+            'tipo_noticia_id' => 'required',
+            'titulo' => 'required',
+            'descricao' => 'required',
+            'corpo_noticia' => 'required',
+            'link_img' => 'required',
         ]);
 
-        $clientes = Clientes::create([
+        $noticias = Noticia::create([
+            'jornalista_id' => $data->input('jornalista_id'),
+            'tipo_noticia_id' => $data->input('tipo_noticia_id'),
+            'titulo' => $data->input('titulo'),
+            'descricao' => $data->input('descricao'),
+            'corpo_noticia' => $data->input('corpo_noticia'),
+            'link_img' => $data->input('link_img'),
             'nome' => $data->input('email'),
-            'cnpj'=> $data->input('cnpj')
         ]);
 
-        return response($clientes, 201)
+        return response($noticias, 201)
         ->header('Content-Type', 'application/json');
 
     }
@@ -72,5 +76,4 @@ class APIController extends Controller
         ->header('Content-Type', 'application/json');
 
     }
-
 }

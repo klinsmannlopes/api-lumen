@@ -21,7 +21,7 @@ class JwtMiddleware
     {
         $token = $request->get('token');
 
-        //dd($token);
+        dd($token);
 
         if(!$token) {
             return response()->json([

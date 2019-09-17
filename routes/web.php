@@ -17,11 +17,21 @@ $router->get('/', function () use ($router) {
 
 //login
 
-$router->post('auth/login', 'AuthController@autenticate');
+$router->post('api/login', 'AuthController@autenticate');
+$router->post('api/register', 'AuthController@create');
 
 
-//Clientes
-$router->get('/clientes', 'APIController@ListaClientes');
+//noticias
+$router->get('/api/news/me', 'NoticiaController@listaClientes');
+$router->get('/api/news/create', 'NoticiaController@createNoticia');
+$router->get('/api/news/update/{news_id}', 'NoticiaController@ListaClientes');
+$router->get('/api/news/delete/{news_id}', 'NoticiaController@ListaClientes');
+$router->get('/api/news/type/{type_id}', 'NoticiaController@ListaClientes');
+
+
+
+
+
 $router->get('/clientes/{id}', 'APIController@ListaCliente');
 $router->post('/clientes', 'APIController@CadastarCliente');
 $router->delete('/clientes/{id}', 'APIController@DeleteCliente');

@@ -11,10 +11,11 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Jornalista::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
         'email' => $faker->email,
+        'nome' => $faker->name,
+        'sobrenome' => $faker->name,
         'password' => app('hash')->make('12345')
     ];
 });
