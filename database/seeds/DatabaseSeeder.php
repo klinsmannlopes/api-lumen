@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,16 +12,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();
-
-        for($i = 0; $i <= 100; $i++) {
-            App\Clientes::create([
-                'nome' => $faker->name,
-                'cnpj' => $faker->numberBetween(0000000001, 9999999999)
-            ]);
-            echo "Registro (". $i .") Cadastrado" . "\n";
-        }
-
-        // $this->call('UsersTableSeeder');
+        Model::unguard();
+        $this->call(UserTableSeeder::class  );
+        Model::unguard();
     }
 }
