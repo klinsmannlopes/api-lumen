@@ -20,11 +20,12 @@ $router->get('/', function () use ($router) {
 $router->post('/api/login', 'AuthController@autenticate');
 $router->post('/api/register', 'AuthController@create');
 
-$router->post('api/me/', 'AuthController@getJornalista');
+$router->post('/api/jornalista', 'JornalistaDadosController@getJornalista');
 
 
 //noticias
 $router->get('/api/news/me', 'NoticiaController@ListaNoticiasJornalista');
+
 $router->get('/api/news/create', 'NoticiaController@createNoticia');
 $router->get('/api/news/update/{news_id}', 'NoticiaController@ListaClientes');
 $router->get('/api/news/delete/{news_id}', 'NoticiaController@ListaClientes');
