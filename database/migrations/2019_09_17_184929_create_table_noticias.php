@@ -18,10 +18,8 @@ class CreateTableNoticias extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('jornalista_id');
             $table->foreign('jornalista_id')->references('id')->on('jornalistas');
-            
             $table->unsignedBigInteger('tipo_noticia_id');
             $table->foreign('tipo_noticia_id')->references('id')->on('tipos_noticias');
-            
             $table->string('titulo');
             $table->string('descricao');
             $table->string('corpo_noticia');

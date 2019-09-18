@@ -14,9 +14,9 @@ class JornalistasTableSeeder extends Seeder
     public function run()
     {
 
-        //factory(App\Jornalista::class, 10)->create();
+        factory(App\Jornalista::class, 10)->create();
 
-        
+        /*
         for($i=0; $i<20; $i++) {
             DB::table('jornalistas')->insert([
                 'email' => 'test'.$i.'@gmail.com',
@@ -25,6 +25,7 @@ class JornalistasTableSeeder extends Seeder
                 'password' => app('hash')->make('12345') ,
             ]);
         }
+        */
         
         
     }
