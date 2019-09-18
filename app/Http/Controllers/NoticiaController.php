@@ -80,17 +80,6 @@ class NoticiaController extends Controller
 
         $noticia =  Noticia::find($news_id);
 
-
-        switch ($data) {
-            case 'value':
-                # code...
-                break;
-            
-            default:
-                # code...
-                break;
-        }
-
         $noticia->tipo_noticia_id = $data->tipo_noticia_id;
         $noticia->titulo = $data->titulo;
         $noticia->descricao = $data->descricao;

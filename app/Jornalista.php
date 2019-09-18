@@ -5,6 +5,7 @@ namespace App;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 use Illuminate\Auth\Authenticatable;
 use Laravel\Lumen\Auth\Authorizable;
@@ -23,8 +24,6 @@ class Jornalista extends Model implements AuthenticatableContract, AuthorizableC
      */
     protected $fillable = [
         'email', 'nome', 'sobrenome', 'password', 
-    ];
-
-
+    ];    
 
 }
