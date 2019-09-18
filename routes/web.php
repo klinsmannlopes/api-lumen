@@ -27,6 +27,6 @@ $router->get('/api/news/me', 'NoticiaController@ListaNoticiasJornalista');
 $router->get('/api/news/type/{type_id}', 'NoticiaController@listaTipoNoticiaJornalista');
 $router->get('/api/news/create', 'NoticiaController@createNoticia');
 
-$router->get('/api/news/update/{news_id}', 'NoticiaController@ListaClientes');
+$router->get('/api/news/update/{news_id}', 'NoticiaController@updateNoticia');
 $router->get('/api/news/delete/{news_id}', 'NoticiaController@ListaClientes');
 //$router->get('/api/news/type/{type_id}', 'NoticiaController@ListaClientes');

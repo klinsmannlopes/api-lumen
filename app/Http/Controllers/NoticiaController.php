@@ -76,27 +76,24 @@ class NoticiaController extends Controller
 
     }
 
-    public function DeleteCliente($id) {
+    public function DeleteNoticia($id) {
 
         $cliente = Clientes::find($id);
 
         $cliente->delete();
 
-        return response($cliente, 201)
-        ->header('Content-Type', 'application/json');
+        return response()->json([
+            'success' => 'Noticia deletada'
+        ], 200);
 
     }
 
-    public function AlteraCliente(Request $data) {
+    public function updateNoticia(Request $data) {
 
-        $cliente = Clientes::find($data->id);
 
-        $cliente->nome = $data->nome;
-        $cliente->cnpj = $data->cnpj;
-        $cliente->save();
-
-        return response($cliente, 201)
-        ->header('Content-Type', 'application/json');
+        return response()->json([
+            'success' => 'Noticia editada'
+        ], 200);
 
     }
 
