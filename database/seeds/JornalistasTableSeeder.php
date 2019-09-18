@@ -15,18 +15,6 @@ class JornalistasTableSeeder extends Seeder
     {
 
         factory(App\Jornalista::class, 10)->create();
-
-        /*
-        for($i=0; $i<20; $i++) {
-            DB::table('jornalistas')->insert([
-                'email' => 'test'.$i.'@gmail.com',
-                'nome' => Str::random(10).'@gmail.com',
-                'sobrenome' => Str::random(10),
-                'password' => app('hash')->make('12345') ,
-            ]);
-        }
-        */
-        
         
     }
 }

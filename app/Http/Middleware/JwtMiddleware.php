@@ -21,8 +21,6 @@ class JwtMiddleware
     {
         $token = $request->get('token');
 
-        dd($token);
-
         if(!$token) {
             return response()->json([
                 'error' => 'Token requirido'

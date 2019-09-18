@@ -17,7 +17,6 @@ class AuthController extends Controller
 
     public function __construct(Request $request) {
         $this->request = $request;
-        
     }
 
     protected function jwt(Jornalista $jornalista) {
@@ -39,6 +38,8 @@ class AuthController extends Controller
 
         
         $user = Jornalista::where('email', $this->request->input('email'))->first();
+
+        //app('hash')->make('12345')
 
         if(!$user) {
             return response()->json([
@@ -75,10 +76,12 @@ class AuthController extends Controller
             'password'=> app('hash')->make($data->input('password'))
         ]);
 
-        dd($jornalista);
-
         return response($jornalista, 201)
         ->header('Content-Type', 'application/json');
 
+    }
+
+    public function getJornalista() {
+        
     }
 }

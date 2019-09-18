@@ -12,10 +12,21 @@ use Illuminate\Http\Request;
 
 class NoticiaController extends Controller
 {
-    public function ListaNoticias() {
-        $noticias = Noticia::all();
 
-        return response($noticias, 201)
+    private $request;
+
+    public function __construct(Request $data) {
+        $this->request = $data;
+        $this->middleware('jwt.auth');
+        //$this->user = $data->auth->id;
+
+    }
+
+    public function ListaNoticiasJornalista() {
+
+        $noticiasJornalista = Noticia::where('jornalista_id', $this->request->auth->id)->get();
+
+        return response($noticiasJornalista, 201)
         ->header('Content-Type', 'application/json');
     }
 
