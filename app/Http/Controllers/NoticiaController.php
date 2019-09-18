@@ -26,22 +26,34 @@ class NoticiaController extends Controller
 
         $noticiasJornalista = Noticia::where('jornalista_id', $this->request->auth->id)->get();
 
+        if(!$noticiasJornalista) {
+            return response()->json([
+                'error' => 'Jornalista nao possui noticias'
+            ], 400);
+        }
+
         return response($noticiasJornalista, 201)
         ->header('Content-Type', 'application/json');
     }
 
-    public function ListaCliente($id) {
+    public function listaTipoNoticiaJornalista($type_id) {
 
-        $clientes = Clientes::find($id);
+        $listaTipoNoticias = Noticia::where('jornalista_id', $this->request->auth->id)
+                                    ->where('tipo_noticia_id', $type_id)->get();
 
-        return response($clientes, 201)
+        if(!$listaTipoNoticias) {
+            return response()->json([
+                'error' => 'noticia nao existe'
+            ], 400);
+        }
+
+        return response($listaTipoNoticias, 201)
         ->header('Content-Type', 'application/json');
     }
 
     public function createNoticia(Request $data) {
 
         $this->validate($data, [
-            'jornalista_id' => 'required',
             'tipo_noticia_id' => 'required',
             'titulo' => 'required',
             'descricao' => 'required',
@@ -50,17 +62,17 @@ class NoticiaController extends Controller
         ]);
 
         $noticias = Noticia::create([
-            'jornalista_id' => $data->input('jornalista_id'),
+            'jornalista_id' =>  $this->request->auth->id,
             'tipo_noticia_id' => $data->input('tipo_noticia_id'),
             'titulo' => $data->input('titulo'),
             'descricao' => $data->input('descricao'),
             'corpo_noticia' => $data->input('corpo_noticia'),
             'link_img' => $data->input('link_img'),
-            'nome' => $data->input('email'),
         ]);
 
-        return response($noticias, 201)
-        ->header('Content-Type', 'application/json');
+        return response()->json([
+            'success' => 'Noticia criada'
+        ], 201);
 
     }
 
@@ -87,4 +99,5 @@ class NoticiaController extends Controller
         ->header('Content-Type', 'application/json');
 
     }
+
 }
