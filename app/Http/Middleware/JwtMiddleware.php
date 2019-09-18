@@ -6,7 +6,7 @@ use Closure;
 use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\ExpireException;
-use App\User;
+use App\Jornalista;
 
 class JwtMiddleware
 {
@@ -39,7 +39,7 @@ class JwtMiddleware
             ], 400);
         }
         
-        $user = User::find($credentials->sub);
+        $user = Jornalista::find($credentials->sub);
         $request->auth = $user;
 
         return $next($request);
