@@ -20,12 +20,11 @@ $router->post('/api/login', 'AuthController@autenticate');
 $router->post('/api/register', 'AuthController@create');
 $router->post('/api/jornalista', 'JornalistaDadosController@getJornalista');
 
-
 //noticias
 $router->get('/api/news/me', 'NoticiaController@ListaNoticiasJornalista');
 $router->get('/api/news/type/{type_id}', 'NoticiaController@listaTipoNoticiaJornalista');
 $router->post('/api/news/create', 'NoticiaController@createNoticia');
+$router->post('/api/news/update/{news_id}', 'NoticiaController@updateNoticia');
 
-$router->get('/api/news/update/{news_id}', 'NoticiaController@updateNoticia');
-$router->get('/api/news/delete/{news_id}', 'NoticiaController@ListaClientes');
+$router->post('/api/news/delete/{news_id}', 'NoticiaController@DeleteNoticia');
 //$router->get('/api/news/type/{type_id}', 'NoticiaController@ListaClientes');

@@ -76,23 +76,42 @@ class NoticiaController extends Controller
 
     }
 
-    public function DeleteNoticia($id) {
+    public function updateNoticia($news_id ,Request $data) {
 
-        $cliente = Clientes::find($id);
+        $noticia =  Noticia::find($news_id);
 
-        $cliente->delete();
+
+        switch ($data) {
+            case 'value':
+                # code...
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+
+        $noticia->tipo_noticia_id = $data->tipo_noticia_id;
+        $noticia->titulo = $data->titulo;
+        $noticia->descricao = $data->descricao;
+        $noticia->corpo_noticia = $data->corpo_noticia;
+        $noticia->link_img = $data->link_img;
+        $noticia->save();
 
         return response()->json([
-            'success' => 'Noticia deletada'
+            'success' => 'Noticia editada'
         ], 200);
 
     }
 
-    public function updateNoticia(Request $data) {
+    public function DeleteNoticia($news_id) {
 
+        $noticia =  Noticia::find($news_id);
+
+        $noticia->delete();
 
         return response()->json([
-            'success' => 'Noticia editada'
+            'success' => 'Noticia deletada'
         ], 200);
 
     }

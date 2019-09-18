@@ -19,6 +19,7 @@ Endereço base "http://localhost:8000"
     - **GET /api/news/me** parametro (token)
     - **GET /api/news/type/{type_id}** parametros (tipo_id | token)
     - **POST /api/news/create** parametros (tipo_noticia_id | titulo | descricao | corpo_noticia | link_img)
+    - **POST /api/news/delete/{news_id}** (Exclui uma notícia do jornalista)
 
 ## Rotas A criar
 
