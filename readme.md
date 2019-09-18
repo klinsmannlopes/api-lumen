@@ -4,18 +4,21 @@
 
 ->php artisan db:seed
 
+->php artisan serve
 
-## Rotas criadas
+Endereço base "http://localhost:8000"
+
+### Rotas criadas
 
 - **Jornalistas**
-	- **/api/register** (rota para criação de novos jornalistas)
-	- **/api/login** parametros (email | password) ->Token e criado. 
-	- **/api/me** (passar token como parametro)
+	- **POST /api/register** (rota para criação de novos jornalistas)
+	- **POST /api/login** parametros (email | password) ->Token e criado. 
+	- **POST /api/me** (passar token como parametro)
 
 - **Notícias** 
-    - **/api/news/me** parametro (token)
-    - **/api/news/type/{type_id}** parametro (tipo_id | token)
-    - **/api/news/create** parametro(tipo_noticia_id | titulo | descricao | corpo_noticia | link_img)
+    - **GET /api/news/me** parametro (token)
+    - **GET /api/news/type/{type_id}** parametros (tipo_id | token)
+    - **POST /api/news/create** parametros (tipo_noticia_id | titulo | descricao | corpo_noticia | link_img)
 
 ## Rotas A criar
 
